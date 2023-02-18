@@ -29,22 +29,24 @@ public class BlogService {
         blog.setContent(content);
         blog.setUser(user);
 
-        List<Blog> blogList = user.getBlogList();
-        blogList.add(blog);
-
-        userRepository1.save(user);
+        if (user != null) {
+            List<Blog> blogList = user.getBlogList();
+            blogList.add(blog);
+            userRepository1.save(user);
+        }
         return blog;
     }
 
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
         Blog blog = blogRepository1.findById(blogId).get();
-        User user = blog.getUser();
 
-        List<Blog> blogList = user.getBlogList();
-        blogList.remove(blog);
-        userRepository1.save(user);
-
-        blogRepository1.deleteById(blogId);
+        if (blog != null) {
+            User user = blog.getUser();
+            List<Blog> blogList = user.getBlogList();
+            blogList.remove(blog);
+            userRepository1.save(user);
+            blogRepository1.deleteById(blogId);
+        }
     }
 }

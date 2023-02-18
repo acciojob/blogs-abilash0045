@@ -49,6 +49,9 @@ public class ImageService {
 
         int screenDimension = Integer.parseInt(screenDimensions.substring(0,2))*Integer.parseInt(screenDimensions.substring(2,3));
 
+        if (imgDimension == 0){
+            return screenDimension;
+        }
         int maxImages = screenDimension/imgDimension;
         return maxImages;
     }
