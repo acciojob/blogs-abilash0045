@@ -5,7 +5,7 @@ import com.driver.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ImageService {
@@ -44,15 +44,16 @@ public class ImageService {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
         Image image = imageRepository2.findById(id).get();
 
-        String imageDimension = image.getDimensions();
-        int imgDimension = Integer.parseInt(imageDimension.substring(0,2))*Integer.parseInt(imageDimension.substring(2,3));
+        String imageDimensions = image.getDimensions();
 
-        int screenDimension = Integer.parseInt(screenDimensions.substring(0,2))*Integer.parseInt(screenDimensions.substring(2,3));
+        String[] img = imageDimensions.split("X");
+        String[] screen = screenDimensions.split("X");
 
-        if (imgDimension == 0){
-            return 0;
-        }
-        int maxImages = screenDimension/imgDimension;
-        return maxImages;
+        int imgValue = Integer.valueOf(img[0]) * Integer.valueOf(img[1]);
+        int screenValue = Integer.valueOf(screen[0]) * Integer.valueOf(screen[1]);
+
+        int count = screenValue/imgValue;
+
+        return count;
     }
 }

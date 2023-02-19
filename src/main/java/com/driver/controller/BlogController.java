@@ -15,7 +15,7 @@ public class BlogController {
     @Autowired
     BlogService blogService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity createBlog(@RequestParam Integer userId ,
                                      @RequestParam String title,
                                      @RequestParam String content) {
