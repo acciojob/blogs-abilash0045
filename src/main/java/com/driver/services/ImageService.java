@@ -25,18 +25,13 @@ public class ImageService {
 
         List<Image> images = blog.getImageList();
         images.add(image);
+        blog.setImageList(images);
 
         blogRepository2.save(blog);
         return image;
     }
 
     public void deleteImage(Integer id){
-        Image image = imageRepository2.findById(id).get();
-        Blog blog = image.getBlog();
-        List<Image> images = blog.getImageList();
-        images.remove(image);
-
-        blogRepository2.save(blog);
         imageRepository2.deleteById(id);
     }
 
@@ -49,11 +44,13 @@ public class ImageService {
         String[] img = imageDimensions.split("X");
         String[] screen = screenDimensions.split("X");
 
-        int imgValue = Integer.valueOf(img[0]) * Integer.valueOf(img[1]);
-        int screenValue = Integer.valueOf(screen[0]) * Integer.valueOf(screen[1]);
+        int xi = Integer.parseInt(img[0]);
+        int yi = Integer.parseInt(img[1]);
 
-        int count = screenValue/imgValue;
+        int xs = Integer.parseInt(screen[0]);
+        int ys = Integer.parseInt(screen[1]);
 
+        int count = (xs/xi)*(ys/yi);
         return count;
     }
 }

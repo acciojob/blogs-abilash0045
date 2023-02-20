@@ -15,8 +15,8 @@ public class Blog{
     private int id;
     private String title;
     private String content;
-    @CreationTimestamp
-    private Date pubDate;
+
+    private Date pubDate = new Date(2023,02,20);
     @ManyToOne
     @JoinColumn
     private User user;

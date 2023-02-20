@@ -24,7 +24,7 @@ public class BlogService {
 
     public Blog createAndReturnBlog(Integer userId, String title, String content) {
         //create a blog at the current time
-//        try {
+
             User user = userRepository1.findById(userId).get();
             Blog blog = new Blog();
             blog.setTitle(title);
@@ -32,28 +32,14 @@ public class BlogService {
             blog.setUser(user);
             List<Blog> blogList = user.getBlogList();
             blogList.add(blog);
+            user.setBlogList(blogList);
+
             userRepository1.save(user);
             return blog;
-//        }
-//        catch(NoSuchElementException e){
-//            return null;
-//        }
     }
 
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
-        try {
-            Blog blog = blogRepository1.findById(blogId).get();
-
-            if (blog != null) {
-                User user = blog.getUser();
-                List<Blog> blogList = user.getBlogList();
-                blogList.remove(blog);
-                userRepository1.save(user);
-                blogRepository1.deleteById(blogId);
-            }
-        }
-        catch (Exception e){
-        }
+        blogRepository1.deleteById(blogId);
     }
 }
