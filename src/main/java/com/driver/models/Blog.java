@@ -16,7 +16,7 @@ public class Blog{
     private String title;
     private String content;
 
-    private Date pubDate = new Date(2023,02,20);
+    private Date pubDate = new Date();
     @ManyToOne
     @JoinColumn
     private User user;
